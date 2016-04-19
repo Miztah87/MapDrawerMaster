@@ -21,6 +21,7 @@ public class Main {
 		    	System.out.println("ERROR - Unable to connect to NXT");
 		    	System.exit(2);
 		    }
+		  
 		    
 		    DataInputStream dis = new DataInputStream(conn.getInputStream());
 		    DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
@@ -29,15 +30,14 @@ public class Main {
 		    boolean done = false;
 		    while (! done)
 		    { 
-			System.out.print("Send message: ");
-			String message = sc.nextLine();
-			//String message = "Hi There!!";
-			
-			dos.writeUTF(message);
-			dos.flush();
-			
-			String ev3Message = dis.readUTF();
-			System.out.println("NXT says: " + ev3Message);
+		    	String message = dis.readUTF();		
+				
+				System.out.println();
+				System.out.println(message);
+				
+				dos.writeUTF(message.toUpperCase());
+				dos.flush();
+				
 			
 			if (message.equalsIgnoreCase("quit"))
 			{
