@@ -1,0 +1,33 @@
+package Default;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComponent;
+
+public class MapComponent extends JComponent{
+
+	
+    private final List<Point> points = new ArrayList<>(); 
+    
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        g2d.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+        for (Point p : points)
+            g2d.fillOval(getWidth() / 2 + p.x, getHeight() / 2 - p.y, 3, 3);
+    }
+    
+    public void addPosition(int x, int y)
+    {
+	points.add(new Point(x, y));
+	repaint();
+    }
+	
+}
